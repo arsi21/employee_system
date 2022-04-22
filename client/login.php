@@ -9,20 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <title>Login</title>
+    <script src="jquery.js"></script>
 </head>
 <body>
-    <!-- <h1>Login</h1>
-
-    <form action="../server/verify-login.php" method="post">
-        <label for="">Username</label>
-        <input type="text" name="username">
-
-        <label for="">Password</label>
-        <input type="password" name="password">
-
-        <input type="submit" value="Login" name="loginBtn">
-    </form> -->
-
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="card col-md-7 col-lg-5">
@@ -43,6 +32,9 @@
                         <?php if(isset($errorMsg)){ echo $errorMsg;}?>
                         <?php if(isset($attempt)){ echo $attempt;}?>
 
+                        <!-- Display the countdown timer in an element -->
+	                    <p id="countDownElem"></p>
+
                         <button type="submit" class="btn btn-primary" name="loginBtn">Login</button>
 
                     </form>
@@ -50,5 +42,55 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        // Set the date we're counting down to
+        var database_lock_date = 
+            "<?php 
+                $get_lock_date = mysqli_query($con, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+                while($row = mysqli_fetch_array($get_lock_date)){
+                    echo $row['lock_date'];
+                }
+            ?>";
+        var countDownDate = new Date(database_lock_date).getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="countDownElem"
+            if(database_lock_date != "")
+                document.getElementById("countDownElem").innerHTML = minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countDownElem").innerHTML = "";
+                
+                $.ajax({
+                    url: "../server/reset-lock-date.php",
+                    method: "POST",
+                    data: {
+
+                    },
+                    success:function(){
+                        alert("login again");
+                    }
+                });
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
