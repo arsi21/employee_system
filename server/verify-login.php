@@ -17,6 +17,9 @@ if(isset($_POST['loginBtn'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
 
+        //put username in session
+        $_SESSION['username'] = $username;
+
         //sql for getting username
         $check_username = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");
         $count_username = mysqli_num_rows($check_username);
@@ -24,10 +27,22 @@ if(isset($_POST['loginBtn'])){
         //check if username exist
         if($count_username > 0){
             //check if the username have a status greater that 0
-            $check_status = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND status != 0");
-            $count_status = mysqli_num_rows($check_status);
+            $check_status = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");
+            $count_status = $check_status->fetch_assoc();
 
-            if($count_status > 0){
+            date_default_timezone_set('Asia/Manila');
+            $dateTimeNow = strtotime("now");
+            $lockDate = strtotime($count_status['lock_date']);
+
+            // if($count_status['lock_date'] != ""){
+            //     if($dateTimeNow > $lockDate){ 
+            //         $default_status = 3;
+            //         mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$username'");
+            //         mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
+            //     }
+            // }
+            
+            if($count_status['status'] > 0){
                 //put username in session
                 $_SESSION['username'] = $username;
 
@@ -58,17 +73,60 @@ if(isset($_POST['loginBtn'])){
                         //check if status is 0
                         if($new_status == 0){
                             date_default_timezone_set('Asia/Manila');
-                            $timer = strtotime("now + 10 second");
+                            $timer = strtotime("now + 60 second");
                             $time_stamp = date('M d, Y h:i:s a', $timer);
 
                             $update_lock_date = mysqli_query($con, "UPDATE user SET lock_date = '$time_stamp' WHERE username = '$_SESSION[username]'");
                         }else{
-                            $errorMsg = '
-                                <div class="alert alert-warning" role="alert">
-                                    Wrong password!
-                                </div>
-                            ';
-                            $attempt = "Remaining attempt: " . $new_status . "<br><br>";
+                            $attempt = "Remaining attempt: " . $new_status;
+                            $errorMsg = '<div class="alert alert-warning" role="alert">Wrong password! <br><span class="fw-bold">'.$attempt .'</span></div>';
+                        }
+                    }
+                }
+            }elseif($count_status['lock_date'] != ""){
+                if($dateTimeNow > $lockDate){ 
+                    
+                    //check if username and password match
+                    $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
+                    $count_password = mysqli_num_rows($check_password);
+
+                    $default_status = 3;
+                    mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$username'");
+                    mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
+                    
+
+                    if($count_password > 0){
+                        $_SESSION['password'] = $password;
+
+                        //reset status
+                        $default_status = 3;
+                        mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$_SESSION[username]'");
+                        mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
+
+                        header("location:home.php");
+                    }else{
+                        //decrement status by 1
+                        $get_status = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");
+
+                        while($row = mysqli_fetch_array($get_status)){
+                            $current_status = $row['status'];
+                            $new_status = $current_status - 1;
+                        }
+
+                        $update_status = mysqli_query($con, "UPDATE user SET status = '$new_status' WHERE username = '$username'");
+
+                        if($update_status){
+                            //check if status is 0
+                            if($new_status == 0){
+                                date_default_timezone_set('Asia/Manila');
+                                $timer = strtotime("now + 60 second");
+                                $time_stamp = date('M d, Y h:i:s a', $timer);
+
+                                $update_lock_date = mysqli_query($con, "UPDATE user SET lock_date = '$time_stamp' WHERE username = '$username'");
+                            }else{
+                                $attempt = "Remaining attempt: " . $new_status;
+                                $errorMsg = '<div class="alert alert-warning" role="alert">Wrong password! <br><span class="fw-bold">'.$attempt .'</span></div>';
+                            }
                         }
                     }
                 }

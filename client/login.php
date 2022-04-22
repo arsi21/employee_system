@@ -19,21 +19,23 @@
                     <h1 class="card-title mb-4">Login</h1>
 
                     <form action="" method="post">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" required>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" required>
                         </div>
 
                         <?php if(isset($errorMsg)){ echo $errorMsg;}?>
-                        <?php if(isset($attempt)){ echo $attempt;}?>
 
                         <!-- Display the countdown timer in an element -->
-	                    <p id="countDownElem"></p>
+                        <div id="countDownCont" class="alert alert-warning" role="alert" style="display:none;">
+                            <span>You can log in again in: </span>
+                            <span id="countDownElem"></span>
+                        </div>
 
                         <button type="submit" class="btn btn-primary" name="loginBtn">Login</button>
 
@@ -45,6 +47,8 @@
 
 
     <script>
+        const countDownCont = document.getElementById("countDownCont");
+
         // Set the date we're counting down to
         var database_lock_date = 
             "<?php 
@@ -72,11 +76,13 @@
 
             // Display the result in the element with id="countDownElem"
             if(database_lock_date != "")
+                countDownCont.style.display = "block";
                 document.getElementById("countDownElem").innerHTML = minutes + "m " + seconds + "s ";
 
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
+                countDownCont.style.display = "none";
                 document.getElementById("countDownElem").innerHTML = "";
                 
                 $.ajax({
@@ -86,7 +92,7 @@
 
                     },
                     success:function(){
-                        alert("login again");
+                        alert("You can login again");
                     }
                 });
             }
