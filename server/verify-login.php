@@ -16,7 +16,6 @@ if(isset($_POST['loginBtn'])){
     if($_POST['username'] != "" && $_POST['password'] != ""){
         $username = $_POST['username'];
         $password = $_POST['password'];
-        echo "click";
 
         //sql for getting username
         $check_username = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");
@@ -39,6 +38,10 @@ if(isset($_POST['loginBtn'])){
                 if($count_password > 0){
                     $_SESSION['password'] = $password;
 
+                    //reset status
+                    $default_status = 3;
+                    mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$_SESSION[username]'");
+
                     header("location:home.php");
                 }else{
                     //decrement status by 1
@@ -60,15 +63,30 @@ if(isset($_POST['loginBtn'])){
 
                             $update_lock_date = mysqli_query($con, "UPDATE user SET lock_date = '$time_stamp' WHERE username = '$_SESSION[username]'");
                         }else{
-                            echo "attempt: " . $new_status;
+                            $errorMsg = '
+                                <div class="alert alert-warning" role="alert">
+                                    Wrong password!
+                                </div>
+                            ';
+                            $attempt = "Remaining attempt: " . $new_status . "<br><br>";
                         }
                     }
                 }
             }
+        }else{
+            $errorMsg = '
+                <div class="alert alert-warning" role="alert">
+                    No username found!
+                </div>
+            ';
         }
 
     }else{
-        echo "Complete the information needed!";
+        $errorMsg = '
+            <div class="alert alert-warning" role="alert">
+                Complete the information needed!
+            </div>
+        ';
     }
 }
 
