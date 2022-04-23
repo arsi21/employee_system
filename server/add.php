@@ -12,12 +12,13 @@ if(isset($_POST['submit'])){
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $gender = $_POST['gender'];
-    $grade = $_POST['grade'];
     $bday = $_POST['bday'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
 
     //query for inserting data into database
-    $sql = "INSERT INTO `student_info`(`first_name`, `last_name`, 
-    `gender`, `grade_level`, `birthday`) VALUES ('$fname', '$lname', '$gender', '$grade', '$bday')";
+    $sql = "INSERT INTO `employee_info`(`first_name`, `last_name`, 
+    `gender`, `birthday`, `address`, `email`) VALUES ('$fname', '$lname', '$gender', '$bday', '$address', '$email')";
 
     //insert data into database
     $con->query($sql) or die ($con->error);

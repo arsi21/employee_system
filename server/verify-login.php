@@ -41,15 +41,17 @@ if(isset($_POST['loginBtn'])){
                 //check if username and password match
                 $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
                 $count_password = mysqli_num_rows($check_password);
+                $user = mysqli_fetch_array($check_password);
 
                 if($count_password > 0){
                     $_SESSION['password'] = $password;
+                    $_SESSION['access'] = $user['access'];
 
                     //reset status
                     $default_status = 3;
                     mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$_SESSION[username]'");
 
-                    header("location:home.php");
+                    header("location:index.php");
                 }else{
                     //decrement status by 1
                     $get_status = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");
@@ -83,6 +85,7 @@ if(isset($_POST['loginBtn'])){
                     //check if username and password match
                     $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
                     $count_password = mysqli_num_rows($check_password);
+                    $user = mysqli_fetch_array($check_password);
 
                     //reset the status to 3 and lock_date
                     $default_status = 3;
@@ -92,13 +95,14 @@ if(isset($_POST['loginBtn'])){
 
                     if($count_password > 0){
                         $_SESSION['password'] = $password;
+                        $_SESSION['access'] = $user['access'];
 
                         //reset status
                         $default_status = 3;
                         mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$_SESSION[username]'");
                         mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
 
-                        header("location:home.php");
+                        header("location:index.php");
                     }else{
                         //decrement status by 1
                         $get_status = mysqli_query($con, "SELECT * FROM user WHERE username = '$username'");

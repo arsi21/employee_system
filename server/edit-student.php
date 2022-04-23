@@ -16,13 +16,17 @@ if(isset($_GET['edit'])){
     $gender = $_GET['gender'];
     $grade = $_GET['grade'];
     $bday = $_GET['bday'];
+    $address = $_GET['address'];
+    $email = $_GET['email'];
 
     //query for inserting data into database
-    $sql = "UPDATE `student_info` SET first_name = '$fname', 
+    $sql = "UPDATE `employee_info` SET 
+    first_name = '$fname', 
     last_name = '$lname', 
     gender = '$gender', 
-    grade_level = '$grade', 
-    birthday = '$bday'
+    birthday = '$bday',
+    address = '$address',
+    email = '$email'
     WHERE id = '$id'";
 
     //insert data into database

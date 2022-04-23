@@ -34,10 +34,11 @@ if(isset($_POST['signup'])){
             ';
         }else{
             $access = "regular";
+            $status = 3;
 
             //query for inserting data into database
-            $sql = "INSERT INTO `user`(`username`, `password`,`access`) 
-            VALUES ('$username', '$password', '$access')";
+            $sql = "INSERT INTO `user`(`username`, `password`,`access`, `status`) 
+            VALUES ('$username', '$password', '$access', '$status')";
 
             //insert data into database
             $con->query($sql) or die ($con->error);

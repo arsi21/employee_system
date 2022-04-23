@@ -35,14 +35,14 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] == "regular"){
         <p class="mb-0">Gender:</p>
         <p class="lead"><?php echo $row['gender']?></p>
 
-        <p class="mb-0">Grade Level:</p>
-        <p class="lead"><?php echo $row['grade_level']?></p>
-
         <p class="mb-0">Birthday:</p>
         <p class="lead"><?php echo $row['birthday']?></p>
 
-        <p class="mb-0">Date Enroll:</p>
-        <p class="lead"><?php echo $row['date_enroll']?></p>
+        <p class="mb-0">Address:</p>
+        <p class="lead"><?php echo $row['address']?></p>
+
+        <p class="mb-0">email:</p>
+        <p class="lead"><?php echo $row['email']?></p>
 
     </div>
 
@@ -53,7 +53,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] == "regular"){
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -79,16 +79,19 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] == "regular"){
                 </div>
 
                 <div class="mb-3">
-                    <label for="grade-input" class="form-label">Grade Level</label>
-                    <input id="grade-input" type="number" class="form-control" name="grade" value="<?php echo $row['grade_level'];?>" required>
-                </div>
-
-                <div class="mb-3">
                     <label for="bday-input" class="form-label">Birhtday</label>
                     <input id="bday-input" type="date" class="form-control" name="bday" value="<?php echo $row['birthday'];?>" required>
                 </div>
 
-                <!-- <input type="submit" name="submit" class="btn btn-primary" value="Add Student"> -->
+                <div class="mb-3">
+                    <label for="grade-input" class="form-label">Address</label>
+                    <input id="grade-input" type="text" class="form-control" name="address" value="<?php echo $row['address'];?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="grade-input" class="form-label">Email</label>
+                    <input id="grade-input" type="email" class="form-control" name="email" value="<?php echo $row['email'];?>" required>
+                </div>
             
             </div>
             <div class="modal-footer">

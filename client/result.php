@@ -6,7 +6,7 @@
 
 
     <div class="container">
-        <h1 class="h3 my-3">Student List</h1>
+        <h1 class="h3 my-3">List of Employee</h1>
 
         <?php 
         //start session
@@ -86,20 +86,20 @@
 
 
 
-     <!-- Modal -->
-     <form action="../server/add.php" method="post">
+    <!-- Modal -->
+    <form action="../server/add.php" method="post">
         <div class="modal fade" id="addStudentModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             
                 <div class="mb-3">
                     <label for="fname-input" class="form-label">First Name</label>
-                    <input id="fname-input" type="text" class="form-control" name="fname">
+                    <input id="fname-input" type="text" class="form-control" name="fname" required>
                 </div>
 
                 <div class="mb-3">
@@ -116,16 +116,19 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="grade-input" class="form-label">Grade Level</label>
-                    <input id="grade-input" type="number" class="form-control" name="grade" required>
-                </div>
-
-                <div class="mb-3">
                     <label for="bday-input" class="form-label">Birhtday</label>
                     <input id="bday-input" type="date" class="form-control" name="bday" required>
                 </div>
 
-                <!-- <input type="submit" name="submit" class="btn btn-primary" value="Add Student"> -->
+                <div class="mb-3">
+                    <label for="bday-input" class="form-label">Address</label>
+                    <input id="bday-input" type="text" class="form-control" name="address" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="bday-input" class="form-label">Email</label>
+                    <input id="bday-input" type="email" class="form-control" name="email" required>
+                </div>
             
             </div>
             <div class="modal-footer">

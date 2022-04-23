@@ -10,7 +10,7 @@ if(isset($_POST['delete'])){
 }
 
 //for displaying all the names
-$sql = "DELETE FROM student_info WHERE id = '$id'";
+$sql = "DELETE FROM employee_info WHERE id = '$id'";
 $con->query($sql) or die ($con->error);
 
 header("Location: ../client/index.php");
