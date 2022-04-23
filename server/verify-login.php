@@ -33,14 +33,6 @@ if(isset($_POST['loginBtn'])){
             date_default_timezone_set('Asia/Manila');
             $dateTimeNow = strtotime("now");
             $lockDate = strtotime($count_status['lock_date']);
-
-            // if($count_status['lock_date'] != ""){
-            //     if($dateTimeNow > $lockDate){ 
-            //         $default_status = 3;
-            //         mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$username'");
-            //         mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
-            //     }
-            // }
             
             if($count_status['status'] > 0){
                 //put username in session
@@ -83,13 +75,16 @@ if(isset($_POST['loginBtn'])){
                         }
                     }
                 }
+            
             }elseif($count_status['lock_date'] != ""){
-                if($dateTimeNow > $lockDate){ 
+                //check if lock_date is expired
+                if($dateTimeNow > $lockDate){
                     
                     //check if username and password match
                     $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
                     $count_password = mysqli_num_rows($check_password);
 
+                    //reset the status to 3 and lock_date
                     $default_status = 3;
                     mysqli_query($con, "UPDATE user SET status = '$default_status' WHERE username = '$username'");
                     mysqli_query($con, "UPDATE user SET lock_date = '' WHERE username = '$username'");
