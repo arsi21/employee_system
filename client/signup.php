@@ -26,6 +26,7 @@ include_once("../server/add-user.php");
                         <div class="mb-3">
                             <label for="id-input" class="form-label">ID</label>
                             <input id="id-input" type="number" class="form-control" name="id" required>
+                            <div class="form-text">This ID is provided by the admin. If you don't have an ID, please contact the admin. <a href="">admin@gmail.com</a></div>
                         </div>
 
                         <div class="mb-3">

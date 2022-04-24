@@ -53,7 +53,7 @@
 
 
      <!-- Modal -->
-     <form action="../server/edit-student.php" method="get">
+     <form action="../server/edit-details.php" method="get">
         <div class="modal fade" id="editStudentModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
