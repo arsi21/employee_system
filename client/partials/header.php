@@ -31,7 +31,7 @@
                         if($_SESSION['access'] == "regular"){
                     ?>
                         <!-- if user is regular show the view details link -->
-                        <a class="btn btn-outline-light mt-2 mt-md-0 mt-lg-0 me-lg-1" href="employee-details.php">View details</a>
+                        <a class="btn btn-outline-light mt-2 mt-md-0 mt-lg-0 me-lg-1" href="employee-details.php?id=<?php echo $_SESSION['employee_id']?>">View details</a>
                     <?php
                         }
                     }

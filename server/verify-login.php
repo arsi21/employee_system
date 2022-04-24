@@ -46,6 +46,7 @@ if(isset($_POST['loginBtn'])){
                 if($count_password > 0){
                     $_SESSION['password'] = $password;
                     $_SESSION['access'] = $user['access'];
+                    $_SESSION['employee_id'] = $user['employee_id'];
 
                     //reset status
                     $default_status = 3;
@@ -96,6 +97,7 @@ if(isset($_POST['loginBtn'])){
                     if($count_password > 0){
                         $_SESSION['password'] = $password;
                         $_SESSION['access'] = $user['access'];
+                        $_SESSION['employee_id'] = $user['employee_id'];
 
                         //reset status
                         $default_status = 3;
