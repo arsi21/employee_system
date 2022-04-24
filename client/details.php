@@ -1,13 +1,4 @@
-<?php 
-//start session
-if(!isset($_SESSION)){
-    session_start();
-}
-
-if(!isset($_SESSION['username']) || $_SESSION['username'] == "regular"){
-    header("Location: index.php");
-}
-?>
+<?php include_once("../server/check-access.php");?>
 
 <!-- add server partials -->
 <?php include_once("../server/show-details.php");?>

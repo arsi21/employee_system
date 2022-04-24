@@ -1,24 +1,22 @@
 <!-- add server partials -->
-<?php include_once("../server/search.php")?>
+<?php 
+include_once("../server/search.php");
+include_once("../server/check-access.php");
+?>
+
 
 <!-- add client partials -->
-<?php include_once("partials/header.php")?>
-
+<?php include_once("partials/header.php");?>
 
     <div class="container">
         <h1 class="h3 my-3">List of Employee</h1>
 
         <?php 
-        //start session
-        if(!isset($_SESSION)){
-            session_start();
-        }
-
-        //check if the user is guest
+        //check if the user is admin
         if(isset($_SESSION['access'])){
-            if($_SESSION['access'] == "admin" || $_SESSION['access'] == "regular"){
+            if($_SESSION['access'] == "admin"){
         ?>
-        <!-- if not guest show add button -->
+        <!-- if admin show add button -->
         <button  class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#addStudentModal">Add New</button>
         <?php
             }
@@ -48,7 +46,7 @@
                         }
                     }
                     ?>
-
+                    
                     <th>First Name</th>
                     <th>Last Name</th>
                 </tr>
@@ -75,7 +73,7 @@
                         }
                     }
                     ?>
-
+                   
                     <td><?php echo $row['first_name']; ?></td>
                     <td><?php echo $row['last_name']; ?></td>
                 </tr>
@@ -83,7 +81,6 @@
             </tbody>
         </table>
     </div>
-
 
 
     <!-- Modal -->
@@ -139,7 +136,6 @@
         </div>
         </div>
     </form>
-
 
 
     

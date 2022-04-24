@@ -20,34 +20,43 @@
                 <div class="navbar-nav mt-3 mt-md-0 mt-lg-0">
                     <form class="d-flex pl-2" action="result.php" method="get">
                         <input class="form-control me-2" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-outline-light" type="submit" name="searchBtn">Search</button>
+                        <button class="btn btn-light" type="submit" name="searchBtn">Search</button>
                     </form>
                 </div>
 
+                <div>
+                    <?php 
+                    //check if the user is regular
+                    if(isset($_SESSION['access'])){
+                        if($_SESSION['access'] == "regular"){
+                    ?>
+                        <!-- if user is regular show the view details link -->
+                        <a class="btn btn-outline-light mt-2 mt-md-0 mt-lg-0 me-lg-1" href="employee-details.php">View details</a>
+                    <?php
+                        }
+                    }
+                    ?>
                 <div class="btn-group mt-2 mt-md-0 mt-lg-0" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php //check if you already login
-                        if(!isset($_SESSION)){
-                            session_start();
-                        }
-
-                        if(isset($_SESSION['username'])){
-                            echo $_SESSION['username'];
-                        }else{
-                            echo "Guest";
-                        }
+                        
+                        <?php 
+                            //check if the user is admin or regular
+                            if(isset($_SESSION['access'])){
+                                if($_SESSION['access'] == "admin" || $_SESSION['access'] == "regular"){
+                                    echo $_SESSION['username'];
+                                }
+                            }
                         ?>
+                        
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <?php if(isset($_SESSION['username'])){?>
-                            <a class="dropdown-item" href="../server/logout.php">Logout</a>
-                            <?php }else{?>
-                            <a class="dropdown-item" href="login.php">Login</a>
-                            <a class="dropdown-item" href="signup.php">Signup</a>
+                            <?php if(isset($_SESSION['access'])){?>
+                                <a class="dropdown-item" href="../server/logout.php">Logout</a>
                             <?php }?>
                         </li>
                     </ul>
+                </div>
                 </div>
 
             </div>
