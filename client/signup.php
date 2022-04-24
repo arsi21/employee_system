@@ -1,5 +1,8 @@
 <!-- add server partials -->
-<?php include_once("../server/add-user.php");?>
+<?php 
+//include_once("../server/add.php");
+include_once("../server/add-user.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +24,11 @@
                     <form action="" method="post">
 
                         <div class="mb-3">
+                            <label for="id-input" class="form-label">ID</label>
+                            <input id="id-input" type="number" class="form-control" name="id" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="fname-input" class="form-label">First Name</label>
                             <input id="fname-input" type="text" class="form-control" name="fname" required>
                         </div>
@@ -30,28 +38,6 @@
                             <input id="lname-input" type="text" class="form-control" name="lname" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="gender-input" class="form-label">Gender</label>
-                                <select name="gender" id="gender-input"  class="form-select" required>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="bday-input" class="form-label">Birhtday</label>
-                            <input id="bday-input" type="date" class="form-control" name="bday" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="bday-input" class="form-label">Address</label>
-                            <input id="bday-input" type="text" class="form-control" name="address" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="bday-input" class="form-label">Email</label>
-                            <input id="bday-input" type="email" class="form-control" name="email" required>
-                        </div>
 
 
 
@@ -73,7 +59,7 @@
 
                         <?php if(isset($errorMsg)){ echo $errorMsg;}?>
                         
-                        <button type="submit" class="btn btn-primary" name="signup">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                     </form>
 
                     <p class="mt-4 text-black-50">Have already an account? <a href="login.php">login here</a></p>
