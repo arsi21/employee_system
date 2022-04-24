@@ -14,7 +14,6 @@ if(isset($_GET['edit'])){
     $fname = $_GET['fname'];
     $lname = $_GET['lname'];
     $gender = $_GET['gender'];
-    $grade = $_GET['grade'];
     $bday = $_GET['bday'];
     $address = $_GET['address'];
     $email = $_GET['email'];
@@ -32,7 +31,7 @@ if(isset($_GET['edit'])){
     //insert data into database
     $con->query($sql) or die ($con->error);
 
-    //redirect to index.php
+    //redirect to details.php
     header("Location: ../client/details.php?id=".$id);
 }
 

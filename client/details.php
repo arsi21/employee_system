@@ -13,11 +13,25 @@
 
             <button class="btn btn-secondary mx-2"  data-bs-toggle="modal" data-bs-target="#editStudentModal" >Edit</button>
             
-            <form action="../server/delete.php" method="post">
-                <input type="hidden" value="<?php echo $row['id']?>" name="id">
-                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-            </form>
+            <?php 
+                //start session
+                if(!isset($_SESSION)){
+                    session_start();
+                }
 
+                //check if the user is admin
+                if(isset($_SESSION['access'])){
+                    if($_SESSION['access'] == "admin"){
+                ?>
+                <!-- if admin show delete button for deleting details -->
+                <form action="../server/delete.php" method="post">
+                    <input type="hidden" value="<?php echo $row['id']?>" name="id">
+                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                </form>
+                <?php
+                    }
+                }
+            ?>
         </div>
 
         <p class="mb-0">Name:</p>
