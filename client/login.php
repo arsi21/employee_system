@@ -40,6 +40,8 @@
                         <button type="submit" class="btn btn-primary" name="loginBtn">Login</button>
 
                     </form>
+
+                    <p class="mt-4 text-black-50">Don't have an account? <a href="signup.php">Sign up</a></p>
                 </div>
             </div>
         </div>
