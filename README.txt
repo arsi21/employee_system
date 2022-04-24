@@ -24,3 +24,4 @@ Front-end technology used:
 
 Back-end technology used:
 - PHP
+- MySQL
