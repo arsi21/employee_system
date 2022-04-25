@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
             $isIdValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid ID!
+                    The ID contains an invalid character!
                 </div>
             ';
         }
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
             $isFnameValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid First Name!
+                    First name contains an invalid character!
                 </div>
             ';
         }
@@ -45,7 +45,7 @@ if(isset($_POST['submit'])){
             $isLnameValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid Last Name!
+                    Last name contains an invalid character!
                 </div>
             ';
         }
@@ -56,7 +56,7 @@ if(isset($_POST['submit'])){
             $isUsernameValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid Username!
+                    The username contains an invalid character!
                 </div>
             ';
         }
@@ -67,7 +67,7 @@ if(isset($_POST['submit'])){
             $isPasswordValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid Password!
+                    Password should be at least 5 characters long!
                 </div>
             ';
         }
@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
             $isConPasswordValid = false;
             $errorMsg = '
                 <div class="alert alert-warning" role="alert">
-                    Invalid Confirm Password!
+                    Confirm password should be at least 5 characters long!
                 </div>
             ';
         }
