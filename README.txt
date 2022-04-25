@@ -1,6 +1,7 @@
 Employee System
 - a system that helps the company to manage employee information. 
-There are two kinds of a user in Employee System the first one is the admin and the second one is a regular user or the employee. 
+There are two kinds of a user in Employee System the first one is the 
+admin and the second one is a regular user or the employee. 
 The admin can add, edit, delete, and view all employees' information. 
 While regular users or employees can only edit and view their information.
 
