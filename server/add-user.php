@@ -43,12 +43,16 @@ if(isset($_POST['submit'])){
                     </div>
                 ';
             }else{
+                //default value of access and status
                 $access = "regular";
                 $status = 3;
+
+                //hash password before inserting to database
+                $hash_password = sha1($password);
     
                 //query for inserting data into database
                 $sql = "INSERT INTO `user`(`username`, `password`,`access`, `status`, `employee_id`) 
-                VALUES ('$username', '$password', '$access', '$status', '$id')";
+                VALUES ('$username', '$hash_password', '$access', '$status', '$id')";
     
                 //insert data into database
                 $con->query($sql) or die ($con->error);

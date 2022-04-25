@@ -38,8 +38,11 @@ if(isset($_POST['loginBtn'])){
                 //put username in session
                 $_SESSION['username'] = $username;
 
+                //hash password
+                $hash_password = sha1($password);
+
                 //check if username and password match
-                $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
+                $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$hash_password'");
                 $count_password = mysqli_num_rows($check_password);
                 $user = mysqli_fetch_array($check_password);
 
@@ -82,9 +85,11 @@ if(isset($_POST['loginBtn'])){
             }elseif($count_status['lock_date'] != ""){
                 //check if lock_date is expired
                 if($dateTimeNow > $lockDate){
-                    
+                    //hash password
+                    $hash_password = sha1($password);
+
                     //check if username and password match
-                    $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
+                    $check_password = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$hash_password'");
                     $count_password = mysqli_num_rows($check_password);
                     $user = mysqli_fetch_array($check_password);
 
