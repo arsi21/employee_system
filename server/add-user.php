@@ -10,6 +10,14 @@ if(isset($_POST['submit'])){
 
     //check if all input field have value
     if($_POST['id'] != "" && $_POST['fname'] != "" && $_POST['lname'] != "" && $_POST['username'] != "" && $_POST['password'] != "" && $_POST['conPassword'] != ""){
+        //get data from the form
+        $id = $_POST['id'];
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $conPassword = $_POST['conPassword'];
+       
         //regex pattern
         $idPattern = "/^\d+$/";
         $namePattern = "/^\s+|\s+$|\s{2,}|[0-9]+|^\-+|\-$|\-{2,}|[^a-zA-Z\s\-]/";
@@ -17,82 +25,62 @@ if(isset($_POST['submit'])){
         $passwordPattern = "/^.{5,}$/";
 
         //check all input if valid
-        if(preg_match($idPattern, $_POST['id'])){
+        if(preg_match($idPattern, $id)){
             $isIdValid = true;
         }else{
             $isIdValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    The ID contains an invalid character!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=id&fname=$fname&lname=$lname&username=$username");
+            exit();
         }
 
-        if(preg_match($namePattern, $_POST['fname']) == 0){
+        if(preg_match($namePattern, $fname) == 0){
             $isFnameValid = true;
         }else{
             $isFnameValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    First name contains an invalid character!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=fname&id=$id&lname=$lname&username=$username");
+            exit();
         }
 
-        if(preg_match($namePattern, $_POST['lname']) == 0){
+        if(preg_match($namePattern, $lname) == 0){
             $isLnameValid = true;
         }else{
             $isLnameValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    Last name contains an invalid character!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=lname&id=$id&fname=$fname&username=$username");
+            exit();
         }
 
-        if(preg_match($usernamePattern, $_POST['username'])){
+        if(preg_match($usernamePattern, $username)){
             $isUsernameValid = true;
         }else{
             $isUsernameValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    The username contains an invalid character!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=username&id=$id&fname=$fname&lname=$lname");
+            exit();
         }
 
-        if(preg_match($passwordPattern, $_POST['password'])){
+        if(preg_match($passwordPattern, $password)){
             $isPasswordValid = true;
         }else{
             $isPasswordValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    Password should be at least 5 characters long!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=password&id=$id&fname=$fname&lname=$lname&username=$username");
+            exit();
         }
 
-        if(preg_match($passwordPattern, $_POST['conPassword'])){
+        if(preg_match($passwordPattern, $conPassword)){
             $isConPasswordValid = true;
         }else{
             $isConPasswordValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    Confirm password should be at least 5 characters long!
-                </div>
-            ';
+            //redirect to signup.php
+            header("Location: ../client/signup.php?errorMsg=conPassword&id=$id&fname=$fname&lname=$lname&username=$username");
+            exit();
         }
 
 
         if($isIdValid && $isFnameValid && $isLnameValid && $isUsernameValid && $isPasswordValid && $isConPasswordValid){
-            //get data from the form
-            $id = $_POST['id'];
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $conPassword = $_POST['conPassword'];
-
             //check if employee information is existing
             $sqlCheckEmp = "SELECT * FROM employee_info WHERE id = '$id' AND first_name = '$fname' AND last_name = '$lname'";
             $employeeData = $con->query($sqlCheckEmp) or die ($con->error);
@@ -106,17 +94,13 @@ if(isset($_POST['submit'])){
         
                 //check if username existing
                 if($totalUser > 0){
-                    $errorMsg = '
-                        <div class="alert alert-warning" role="alert">
-                            Username is already taken!
-                        </div>
-                    ';
+                    //redirect to signup.php
+                    header("Location: ../client/signup.php?errorMsg=userTaken&id=$id&fname=$fname&lname=$lname&username=$username");
+                    exit();
                 }elseif($password != $conPassword){//check if password and confirm password match
-                    $errorMsg = '
-                        <div class="alert alert-warning" role="alert">
-                            Password and confirm password did not match!
-                        </div>
-                    ';
+                    //redirect to signup.php
+                    header("Location: ../client/signup.php?errorMsg=passNotMatch&id=$id&fname=$fname&lname=$lname&username=$username");
+                    exit();
                 }else{
                     //default value of access and status
                     $access = "regular";
@@ -137,20 +121,15 @@ if(isset($_POST['submit'])){
         
                 }
             }else{
-                //if employee not existing show error
-                $errorMsg = '
-                        <div class="alert alert-danger" role="alert">
-                            Data not found! Make sure you type your information correctly.
-                        </div>
-                ';
+                //if employee not existing redirect to signup.php
+                header("Location: ../client/signup.php?errorMsg=dataNotFound&id=$id&fname=$fname&lname=$lname&username=$username");
+                exit();
             }
         }
     }else{
-        $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    Fill up all field!
-                </div>
-        ';
+        //if some of field is no value redirect to signup.php
+        header("Location: ../client/signup.php?errorMsg=fillUpAll&id=$id&fname=$fname&lname=$lname&username=$username");
+        exit();
     }
 }
 

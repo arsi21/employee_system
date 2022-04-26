@@ -1,9 +1,3 @@
-<!-- add server partials -->
-<?php 
-//include_once("../server/add.php");
-include_once("../server/add-user.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,44 +15,185 @@ include_once("../server/add-user.php");
                 <div class="card-body p-4">
                     <h1 class="card-title mb-4">Sign Up</h1>
 
-                    <form action="" method="post">
+                    <form action="../server/add-user.php" method="post">
+                        <?php 
+                            //for showing error
+                            if(isset($_GET['errorMsg'])){
+                                $errorMsg = $_GET['errorMsg'];
 
-                        <div class="mb-3">
-                            <label for="id-input" class="form-label">ID</label>
-                            <input id="id-input" type="number" class="form-control" name="id" required>
-                            <div class="form-text">This ID is provided by the admin. If you don't have an ID, please contact the admin. <a href="">admin@gmail.com</a></div>
-                        </div>
+                                if($errorMsg == "id"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            The ID contains an invalid character!
+                                        </div>
+                                    ';
 
-                        <div class="mb-3">
-                            <label for="fname-input" class="form-label">First Name</label>
-                            <input id="fname-input" type="text" class="form-control" name="fname" required>
-                        </div>
+                                }elseif($errorMsg == "fname"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            First name contains an invalid character!
+                                        </div>
+                                    ';
 
-                        <div class="mb-3">
-                            <label for="lname-input" class="form-label">Last Name</label>
-                            <input id="lname-input" type="text" class="form-control" name="lname" required>
-                        </div>
+                                }elseif($errorMsg == "lname"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Last name contains an invalid character!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "username"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            The username contains an invalid character!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "password"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Password should be at least 5 characters long!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "conPassword"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Confirm password should be at least 5 characters long!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "userTaken"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Username is already taken!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "passNotMatch"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Password and confirm password did not match!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "dataNotFound"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Data not found! Make sure you type your information correctly.
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "fillUpAll"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Fill up all field!
+                                        </div>
+                                    ';
+
+                                }
+                            }
+                        ?>
 
 
 
+                        <?php
+                            //for showing the inputed value
+                            if(isset($_GET['id']) || isset($_GET['fname']) || isset($_GET['lname']) || isset($_GET['username'])){
+                                //get data from the add-user
+                                if(isset($_GET['id'])){
+                                    $id = $_GET['id'];
+                                }else{
+                                    $id = "";
+                                }
+
+                                if(isset($_GET['fname'])){
+                                    $fname = $_GET['fname'];
+                                }else{
+                                    $fname = "";
+                                }
+
+                                if(isset($_GET['lname'])){
+                                    $lname = $_GET['lname'];
+                                }else{
+                                    $lname = "";
+                                }
+
+                                if(isset($_GET['username'])){
+                                    $username = $_GET['username'];
+                                }else{
+                                    $username = "";
+                                }
+                        ?>
+                                <div class="mb-3">
+                                    <label for="id-input" class="form-label">ID</label>
+                                    <input id="id-input" type="number" class="form-control" name="id" value="<?php echo $id;?>" required>
+                                    <div class="form-text">This ID is provided by the admin. If you don't have an ID, please contact the admin. <a href="">admin@gmail.com</a></div>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label for="fname-input" class="form-label">First Name</label>
+                                    <input id="fname-input" type="text" class="form-control" name="fname" value="<?php echo $fname;?>" required>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label for="lname-input" class="form-label">Last Name</label>
+                                    <input id="lname-input" type="text" class="form-control" name="lname" value="<?php echo $lname;?>" required>
+                                </div>
+        
+        
+                                <div class="mb-3 mt-5">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" value="<?php echo $username;?>" required>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="conPassword" required>
+                                </div>
+                        <?php
+                            }else{
+                        ?>
+                                <!-- for showing input fields -->
+                                <div class="mb-3">
+                                    <label for="id-input" class="form-label">ID</label>
+                                    <input id="id-input" type="number" class="form-control" name="id" required>
+                                    <div class="form-text">This ID is provided by the admin. If you don't have an ID, please contact the admin. <a href="">admin@gmail.com</a></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="fname-input" class="form-label">First Name</label>
+                                    <input id="fname-input" type="text" class="form-control" name="fname" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="lname-input" class="form-label">Last Name</label>
+                                    <input id="lname-input" type="text" class="form-control" name="lname" required>
+                                </div>
 
 
-                        <div class="mb-3 mt-5">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required>
-                        </div>
+                                <div class="mb-3 mt-5">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" required>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required>
-                        </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="conPassword" required>
-                        </div>
-
-                        <?php if(isset($errorMsg)){ echo $errorMsg;}?>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="conPassword" required>
+                                </div>
+                        <?php
+                            }
+                        ?>
                         
                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                     </form>
