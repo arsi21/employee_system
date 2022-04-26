@@ -19,6 +19,63 @@
                     <h1 class="card-title mb-4">Login</h1>
 
                     <form action="" method="post">
+                        <?php 
+                            //for showing error
+                            if(isset($_GET['errorMsg'])){
+                                $errorMsg = $_GET['errorMsg'];
+
+                                if($errorMsg == "username"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            The username contains an invalid character!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "password"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Password should be at least 5 characters long!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "noUserFound"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            No username found!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "completeInfo"){
+                                    echo '
+                                        <div class="alert alert-warning" role="alert">
+                                            Complete the information needed!
+                                        </div>
+                                    ';
+
+                                }elseif($errorMsg == "wrongPassword"){
+                                    echo '
+                                        <div id="errorMsgDiv" class="alert alert-warning" role="alert">
+                                            Wrong password!
+                                            <br>
+                                            <span class="fw-bold">'
+                                            .$_GET['attempt'].
+                                            '</span>
+                                        </div>
+                                    ';
+
+                                }
+                            }
+                        ?>
+
+
+                        <!-- Display the countdown timer in an element -->
+                        <div id="countDownCont" class="alert alert-warning" role="alert" style="display:none;">
+                            <span>You can log in again in: </span>
+                            <span id="countDownElem"></span>
+                        </div>
+
+
+
                         <div class="mb-3">
                             <label class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" required>
@@ -29,13 +86,6 @@
                             <input type="password" class="form-control" name="password" required>
                         </div>
 
-                        <?php if(isset($errorMsg)){ echo $errorMsg;}?>
-
-                        <!-- Display the countdown timer in an element -->
-                        <div id="countDownCont" class="alert alert-warning" role="alert" style="display:none;">
-                            <span>You can log in again in: </span>
-                            <span id="countDownElem"></span>
-                        </div>
 
                         <button type="submit" class="btn btn-primary" name="loginBtn">Login</button>
 
@@ -80,6 +130,12 @@
             if(database_lock_date != "")
                 countDownCont.style.display = "block";
                 document.getElementById("countDownElem").innerHTML = minutes + "m " + seconds + "s ";
+                if(document.getElementById("errorMsgDiv") != null){
+                    const errorMsgDiv = document.getElementById("errorMsgDiv");
+                    if(countDownCont.style.display == "block"){
+                    errorMsgDiv.style.display = "none";
+                }
+                }
 
             // If the count down is finished, write some text
             if (distance < 0) {

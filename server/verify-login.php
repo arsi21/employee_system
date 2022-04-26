@@ -14,38 +14,36 @@ if(isset($_POST['loginBtn'])){
 
     //check if username and password have value
     if($_POST['username'] != "" && $_POST['password'] != ""){
+        //get all the input data
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
         //regex pattern
         $usernamePattern = "/^[a-zA-Z\d\-\_\.@]+$/";
         $passwordPattern = "/^.{5,}$/";
 
         //check if all input are valid
-        if(preg_match($usernamePattern, $_POST['username'])){
+        if(preg_match($usernamePattern, $username)){
             $isUsernameValid = true;
         }else{
             $isUsernameValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    The username contains an invalid character!
-                </div>
-            ';
+
+            //redirect to login.php
+            header("Location: ../client/login.php?errorMsg=username");
+            exit();
         }
 
-        if(preg_match($passwordPattern, $_POST['password'])){
+        if(preg_match($passwordPattern, $password)){
             $isPasswordValid = true;
         }else{
             $isPasswordValid = false;
-            $errorMsg = '
-                <div class="alert alert-warning" role="alert">
-                    Password should be at least 5 characters long!
-                </div>
-            ';
+
+            //redirect to login.php
+            header("Location: ../client/login.php?errorMsg=password&username=$username");
+            exit();
         }
 
         if($isUsernameValid && $isPasswordValid){
-            //get all the input data
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-
             //put username in session
             $_SESSION['username'] = $username;
 
@@ -106,7 +104,9 @@ if(isset($_POST['loginBtn'])){
                                 $update_lock_date = mysqli_query($con, "UPDATE user SET lock_date = '$time_stamp' WHERE username = '$_SESSION[username]'");
                             }else{
                                 $attempt = "Remaining attempt: " . $new_status;
-                                $errorMsg = '<div class="alert alert-warning" role="alert">Wrong password! <br><span class="fw-bold">'.$attempt .'</span></div>';
+                                //redirect to login.php
+                                header("Location: ../client/login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
+                                exit();
                             }
                         }
                     }
@@ -160,27 +160,25 @@ if(isset($_POST['loginBtn'])){
                                     $update_lock_date = mysqli_query($con, "UPDATE user SET lock_date = '$time_stamp' WHERE username = '$username'");
                                 }else{
                                     $attempt = "Remaining attempt: " . $new_status;
-                                    $errorMsg = '<div class="alert alert-warning" role="alert">Wrong password! <br><span class="fw-bold">'.$attempt .'</span></div>';
+                                    //redirect to login.php
+                                    header("Location: ../client/login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
+                                    exit();
                                 }
                             }
                         }
                     }
                 }
             }else{
-                $errorMsg = '
-                    <div class="alert alert-warning" role="alert">
-                        No username found!
-                    </div>
-                ';
+                //redirect to login.php
+                header("Location: ../client/login.php?errorMsg=noUserFound&username=$username");
+                exit();
             }
 
         }
     }else{
-        $errorMsg = '
-            <div class="alert alert-warning" role="alert">
-                Complete the information needed!
-            </div>
-        ';
+        //redirect to login.php
+        header("Location: ../client/login.php?errorMsg=completeInfo");
+        exit();
     }
 }
 
