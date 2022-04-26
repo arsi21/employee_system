@@ -20,8 +20,9 @@ if(isset($_POST['submit'])){
         $email = $_POST['email'];
 
         //query for inserting data into database
-        $sql = "INSERT INTO `employee_info`(`first_name`, `last_name`, 
-        `gender`, `birthday`, `address`, `email`) VALUES ('$fname', '$lname', '$gender', '$bday', '$address', '$email')";
+        $sql = "INSERT INTO `employee_info`
+        (`first_name`, `last_name`, `gender`, `birthday`, `address`, `email`) 
+        VALUES ('$fname', '$lname', '$gender', '$bday', '$address', '$email')";
 
         //insert data into database
         $con->query($sql) or die ($con->error);

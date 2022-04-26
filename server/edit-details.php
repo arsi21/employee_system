@@ -18,7 +18,7 @@ if(isset($_GET['edit'])){
     $address = $_GET['address'];
     $email = $_GET['email'];
 
-    //query for inserting data into database
+    //query for updating data into database
     $sql = "UPDATE `employee_info` SET 
     first_name = '$fname', 
     last_name = '$lname', 

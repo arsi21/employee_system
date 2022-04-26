@@ -6,16 +6,17 @@ include_once ("connection.php");
 $con = connection();
 
 if(isset($_POST['delete'])){
+
+    //get the employee id
     $id = $_POST['id'];
+
+    //for deleting details
+    $deleteEmp = "DELETE FROM employee_info WHERE id = '$id'";
+    $con->query($deleteEmp) or die ($con->error);
+
+    $deleteUser = "DELETE FROM user WHERE employee_id = '$id'";
+    $con->query($deleteUser) or die ($con->error);
+
+    header("Location: ../client/index.php");
 }
-
-//for deleting details
-$deleteEmp = "DELETE FROM employee_info WHERE id = '$id'";
-$con->query($deleteEmp) or die ($con->error);
-
-$deleteUser = "DELETE FROM user WHERE employee_id = '$id'";
-$con->query($deleteUser) or die ($con->error);
-
-header("Location: ../client/index.php");
-
 ?>
