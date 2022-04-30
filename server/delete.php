@@ -17,6 +17,6 @@ if(isset($_POST['delete'])){
     $deleteUser = "DELETE FROM user WHERE employee_id = '$id'";
     $con->query($deleteUser) or die ($con->error);
 
-    header("Location: ../client/index.php");
+    header("Location: ../index.php");
 }
 ?>

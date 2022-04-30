@@ -1,7 +1,7 @@
-<?php include_once("../server/check-access.php");?>
+<?php include_once("server/check-access.php");?>
 
 <!-- add server partials -->
-<?php include_once("../server/show-details.php");?>
+<?php include_once("server/show-details.php");?>
 
 <!-- add client partials -->
 <?php include_once("partials/header.php")?>
@@ -24,7 +24,7 @@
                     if($_SESSION['access'] == "admin"){
                 ?>
                 <!-- if admin show delete button for deleting details -->
-                <form action="../server/delete.php" method="post">
+                <form action="server/delete.php" method="post">
                     <input type="hidden" value="<?php echo $row['id']?>" name="id">
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                 </form>
@@ -53,7 +53,7 @@
 
 
      <!-- Modal -->
-     <form action="../server/edit-details.php" method="get">
+     <form action="server/edit-details.php" method="get">
         <div class="modal fade" id="editStudentModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

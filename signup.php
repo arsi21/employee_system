@@ -15,7 +15,7 @@
                 <div class="card-body p-4">
                     <h1 class="card-title mb-4">Sign Up</h1>
 
-                    <form action="../server/add-user.php" method="post">
+                    <form action="server/add-user.php" method="post">
                         <?php 
                             //for showing error
                             if(isset($_GET['errorMsg'])){

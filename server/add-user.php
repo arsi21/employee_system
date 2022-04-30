@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
         }else{
             $isIdValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=id&fname=$fname&lname=$lname&username=$username");
+            header("Location: ../signup.php?errorMsg=id&fname=$fname&lname=$lname&username=$username");
             exit();
         }
 
@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
         }else{
             $isFnameValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=fname&id=$id&lname=$lname&username=$username");
+            header("Location: ../signup.php?errorMsg=fname&id=$id&lname=$lname&username=$username");
             exit();
         }
 
@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
         }else{
             $isLnameValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=lname&id=$id&fname=$fname&username=$username");
+            header("Location: ../signup.php?errorMsg=lname&id=$id&fname=$fname&username=$username");
             exit();
         }
 
@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
         }else{
             $isUsernameValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=username&id=$id&fname=$fname&lname=$lname");
+            header("Location: ../signup.php?errorMsg=username&id=$id&fname=$fname&lname=$lname");
             exit();
         }
 
@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
         }else{
             $isPasswordValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=password&id=$id&fname=$fname&lname=$lname&username=$username");
+            header("Location: ../signup.php?errorMsg=password&id=$id&fname=$fname&lname=$lname&username=$username");
             exit();
         }
 
@@ -75,7 +75,7 @@ if(isset($_POST['submit'])){
         }else{
             $isConPasswordValid = false;
             //redirect to signup.php
-            header("Location: ../client/signup.php?errorMsg=conPassword&id=$id&fname=$fname&lname=$lname&username=$username");
+            header("Location: ../signup.php?errorMsg=conPassword&id=$id&fname=$fname&lname=$lname&username=$username");
             exit();
         }
 
@@ -95,11 +95,11 @@ if(isset($_POST['submit'])){
                 //check if username existing
                 if($totalUser > 0){
                     //redirect to signup.php
-                    header("Location: ../client/signup.php?errorMsg=userTaken&id=$id&fname=$fname&lname=$lname&username=$username");
+                    header("Location: ../signup.php?errorMsg=userTaken&id=$id&fname=$fname&lname=$lname&username=$username");
                     exit();
                 }elseif($password != $conPassword){//check if password and confirm password match
                     //redirect to signup.php
-                    header("Location: ../client/signup.php?errorMsg=passNotMatch&id=$id&fname=$fname&lname=$lname&username=$username");
+                    header("Location: ../signup.php?errorMsg=passNotMatch&id=$id&fname=$fname&lname=$lname&username=$username");
                     exit();
                 }else{
                     //default value of access and status
@@ -117,18 +117,18 @@ if(isset($_POST['submit'])){
                     $con->query($sql) or die ($con->error);
         
                     //redirect to index.php
-                    header("Location: ../client/login.php");
+                    header("Location: ../login.php");
         
                 }
             }else{
                 //if employee not existing redirect to signup.php
-                header("Location: ../client/signup.php?errorMsg=dataNotFound&id=$id&fname=$fname&lname=$lname&username=$username");
+                header("Location: ../signup.php?errorMsg=dataNotFound&id=$id&fname=$fname&lname=$lname&username=$username");
                 exit();
             }
         }
     }else{
         //if some of field is no value redirect to signup.php
-        header("Location: ../client/signup.php?errorMsg=fillUpAll&id=$id&fname=$fname&lname=$lname&username=$username");
+        header("Location: ../signup.php?errorMsg=fillUpAll&id=$id&fname=$fname&lname=$lname&username=$username");
         exit();
     }
 }

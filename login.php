@@ -1,4 +1,4 @@
-<?php include("../server/verify-login.php")?>
+<?php include("server/verify-login.php")?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -144,7 +144,7 @@
                 document.getElementById("countDownElem").innerHTML = "";
                 
                 $.ajax({
-                    url: "../server/reset-lock-date.php",
+                    url: "server/reset-lock-date.php",
                     method: "POST",
                     data: {
 

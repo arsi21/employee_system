@@ -52,7 +52,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <?php if(isset($_SESSION['access'])){?>
-                                <a class="dropdown-item" href="../server/logout.php">Logout</a>
+                                <a class="dropdown-item" href="server/logout.php">Logout</a>
                             <?php }?>
                         </li>
                     </ul>

@@ -1,7 +1,7 @@
 <!-- add server partials -->
 <?php 
-include_once("../server/search.php");
-include_once("../server/check-access.php");
+include_once("server/search.php");
+include_once("server/check-access.php");
 ?>
 
 
@@ -84,7 +84,7 @@ include_once("../server/check-access.php");
 
 
     <!-- Modal -->
-    <form action="../server/add.php" method="post">
+    <form action="server/add.php" method="post">
         <div class="modal fade" id="addStudentModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

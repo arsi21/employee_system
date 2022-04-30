@@ -9,6 +9,6 @@ unset($_SESSION['access']);
 unset($_SESSION['employee_id']);
 
 //redirect to index.php
-header("Location: ../client/index.php");
+header("Location: ../index.php");
 
 ?>

@@ -28,10 +28,10 @@ if(isset($_POST['submit'])){
         $con->query($sql) or die ($con->error);
 
         //redirect to index.php
-        header("Location: ../client/index.php");
+        header("Location: ../index.php");
     }else{
         //redirect to index.php
-        header("Location: ../client/index.php");
+        header("Location: ../index.php");
     }
 }
 

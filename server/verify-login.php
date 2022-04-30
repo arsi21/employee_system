@@ -29,7 +29,7 @@ if(isset($_POST['loginBtn'])){
             $isUsernameValid = false;
 
             //redirect to login.php
-            header("Location: ../client/login.php?errorMsg=username");
+            header("Location: login.php?errorMsg=username");
             exit();
         }
 
@@ -39,7 +39,7 @@ if(isset($_POST['loginBtn'])){
             $isPasswordValid = false;
 
             //redirect to login.php
-            header("Location: ../client/login.php?errorMsg=password&username=$username");
+            header("Location: login.php?errorMsg=password&username=$username");
             exit();
         }
 
@@ -105,7 +105,7 @@ if(isset($_POST['loginBtn'])){
                             }else{
                                 $attempt = "Remaining attempt: " . $new_status;
                                 //redirect to login.php
-                                header("Location: ../client/login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
+                                header("Location: login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
                                 exit();
                             }
                         }
@@ -161,7 +161,7 @@ if(isset($_POST['loginBtn'])){
                                 }else{
                                     $attempt = "Remaining attempt: " . $new_status;
                                     //redirect to login.php
-                                    header("Location: ../client/login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
+                                    header("Location: login.php?errorMsg=wrongPassword&username=$username&attempt=$attempt");
                                     exit();
                                 }
                             }
@@ -170,14 +170,14 @@ if(isset($_POST['loginBtn'])){
                 }
             }else{
                 //redirect to login.php
-                header("Location: ../client/login.php?errorMsg=noUserFound&username=$username");
+                header("Location: login.php?errorMsg=noUserFound&username=$username");
                 exit();
             }
 
         }
     }else{
         //redirect to login.php
-        header("Location: ../client/login.php?errorMsg=completeInfo");
+        header("Location: login.php?errorMsg=completeInfo");
         exit();
     }
 }
