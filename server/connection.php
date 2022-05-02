@@ -1,15 +1,15 @@
 <?php 
 
     function connection(){
-        // $serverName = "localhost";
-        // $username = "root";
-        // $password = "";
-        // $dbName = "employee_system";
+        $serverName = "localhost";
+        $username = "root";
+        $password = "";
+        $dbName = "employee_system";
 
-        $serverName = "sql113.epizy.com";
-        $username = "epiz_31620236";
-        $password = "y86WJzZc6g";
-        $dbName = "epiz_31620236_employee_system";
+        // $serverName = "sql113.epizy.com";
+        // $username = "epiz_31620236";
+        // $password = "y86WJzZc6g";
+        // $dbName = "epiz_31620236_employee_system";
 
         //create connection
         $con = new mysqli($serverName, $username, $password, $dbName);

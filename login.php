@@ -63,6 +63,13 @@
                                         </div>
                                     ';
 
+                                }elseif($errorMsg == "loginRequired"){
+                                    echo '
+                                        <div id="errorMsgDiv" class="alert alert-warning" role="alert">
+                                            Log in is required!
+                                        </div>
+                                    ';
+
                                 }
                             }
                         ?>
@@ -76,16 +83,37 @@
 
 
 
-                        <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required>
-                        </div>
+                        <?php
+                            //for showing the inputed value
+                            if(isset($_GET['username'])){
+                                //get data from the verify-login
+                                $username = $_GET['username'];
+                        ?>
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" value="<?php echo $username;?>" required>
+                                </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required>
-                        </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+                        <?php
+                            }else{
+                        ?>
+                                <!-- for showing input fields -->
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" required>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+                        <?php
+                            }
+                        ?>
 
                         <button type="submit" class="btn btn-primary" name="loginBtn">Login</button>
 
