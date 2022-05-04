@@ -11,13 +11,12 @@ include_once("connection.php");
 
  //check if the login button is clicked
 if(isset($_POST['loginBtn'])){
-
+    //get all the input data
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
     //check if username and password have value
     if($_POST['username'] != "" && $_POST['password'] != ""){
-        //get all the input data
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
         //regex pattern
         $usernamePattern = "/^[a-zA-Z\d\-\_\.@]+$/";
         $passwordPattern = "/^.{5,}$/";
@@ -177,7 +176,7 @@ if(isset($_POST['loginBtn'])){
         }
     }else{
         //redirect to login.php
-        header("Location: login.php?errorMsg=completeInfo");
+        header("Location: login.php?errorMsg=completeInfo&username=$username");
         exit();
     }
 }
