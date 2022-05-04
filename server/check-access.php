@@ -24,10 +24,10 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
     if($count_user > 0){
         $_SESSION['access'] = $rowData['access'];//set session value
     }else{
-        header("location:login.php?errorMsg=loginRequired");
+        header("location:login.php");
     }
 }else{
-    header("location:login.php?errorMsg=loginRequired");
+    header("location:login.php");
 }
 
 ?>

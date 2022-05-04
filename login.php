@@ -63,13 +63,6 @@
                                         </div>
                                     ';
 
-                                }elseif($errorMsg == "loginRequired"){
-                                    echo '
-                                        <div id="errorMsgDiv" class="alert alert-warning" role="alert">
-                                            Log in is required!
-                                        </div>
-                                    ';
-
                                 }
                             }
                         ?>
