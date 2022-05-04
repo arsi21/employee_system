@@ -7,22 +7,16 @@ $con = connection();
 
 //check if the submit button is clicked
 if(isset($_POST['submit'])){
+    //get data from the form
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $gender = $_POST['gender'];
+    $bday = $_POST['bday'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
 
     //check if all input fields have value
     if(!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['gender']) && !empty($_POST['bday']) && !empty($_POST['address']) && !empty($_POST['email'])){
-
-        //get data from the form
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $gender = $_POST['gender'];
-        $bday = $_POST['bday'];
-        $address = $_POST['address'];
-        $email = $_POST['email'];
-
-
-
-                
-
         //regex pattern
         $namePattern = "/^\s+|\s+$|\s{2,}|[0-9]+|^\-+|\-$|\-{2,}|[^a-zA-Z\s\-]/";
         $bdayPattern = "/^[\d\-]+$/";
@@ -114,7 +108,7 @@ if(isset($_POST['submit'])){
         }
     }else{
         //redirect to index.php
-        header("Location: ../index.php");
+        header("Location: ../index.php?errorMsg=emptyField&fname=$fname&lname=$lname&gender=$gender&bday=$bday&address=$address&email=$email");
     }
 }
 

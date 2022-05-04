@@ -136,6 +136,12 @@ include_once("server/check-access.php");
                                     Email contains an invalid character!
                                 </div>
                             ';
+                        }elseif($errorMsg == "emptyField"){
+                            echo '
+                                <div class="alert alert-warning" role="alert">
+                                    Fill up all fields!
+                                </div>
+                            ';
                         }
                     }
                 ?>
