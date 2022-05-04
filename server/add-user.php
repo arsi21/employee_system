@@ -7,17 +7,16 @@ $con = connection();
 
 //check if the submit button is clicked
 if(isset($_POST['submit'])){
+    //get data from the form
+    $id = $_POST['id'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $conPassword = $_POST['conPassword'];
 
     //check if all input field have value
     if($_POST['id'] != "" && $_POST['fname'] != "" && $_POST['lname'] != "" && $_POST['username'] != "" && $_POST['password'] != "" && $_POST['conPassword'] != ""){
-        //get data from the form
-        $id = $_POST['id'];
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $conPassword = $_POST['conPassword'];
-       
         //regex pattern
         $idPattern = "/^\d+$/";
         $namePattern = "/^\s+|\s+$|\s{2,}|[0-9]+|^\-+|\-$|\-{2,}|[^a-zA-Z\s\-]/";
